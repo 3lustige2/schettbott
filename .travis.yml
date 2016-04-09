@@ -16,8 +16,6 @@ deploy:
   skip_cleanup: true
 install:
 - "composer install"
-notifications:
-  email: false
 script: "/bin/true"
 sudo: false
 env:
