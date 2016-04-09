@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cbb639c54fe142d7b84439c30ad83f1c",
-    "content-hash": "6e146a0a85f7857663d321f0792cf8b8",
+    "hash": "82d3474216ad0e902a37961cc7e1d3f4",
+    "content-hash": "828add6dc4d79dbc58b3a206b8914794",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -493,26 +493,26 @@
         },
         {
             "name": "irazasyed/telegram-bot-sdk",
-            "version": "v2.0.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/irazasyed/telegram-bot-sdk.git",
-                "reference": "d51ecbe67de372a601dad5ca5b412995aecdc94d"
+                "url": "git@github.com:irazasyed/telegram-bot-sdk.git",
+                "reference": "ab2d260e99e7dfaada17b0df3c7a83a370b51e21"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/irazasyed/telegram-bot-sdk/zipball/d51ecbe67de372a601dad5ca5b412995aecdc94d",
-                "reference": "d51ecbe67de372a601dad5ca5b412995aecdc94d",
+                "url": "https://api.github.com/repos/irazasyed/telegram-bot-sdk/zipball/ab2d260e99e7dfaada17b0df3c7a83a370b51e21",
+                "reference": "ab2d260e99e7dfaada17b0df3c7a83a370b51e21",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "~6.0",
-                "illuminate/support": "5.0.*|5.1.*|5.2.*",
+                "illuminate/support": "~5.0",
                 "php": ">=5.5.0"
             },
             "require-dev": {
                 "phpspec/prophecy": "^1.5",
-                "phpunit/phpunit": "^4.8|^5.0"
+                "phpunit/phpunit": "^4.8 || ^5.0"
             },
             "suggest": {
                 "illuminate/container": "Hold dependencies to be injected in commands constructors",
@@ -521,7 +521,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0-dev"
+                    "dev-master": "3.0-dev"
                 }
             },
             "autoload": {
@@ -551,7 +551,7 @@
                 "telegram php",
                 "telegram sdk"
             ],
-            "time": "2015-12-27 20:25:51"
+            "time": "2016-04-06 11:59:14"
         },
         {
             "name": "monolog/monolog",
@@ -1374,7 +1374,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "irazasyed/telegram-bot-sdk": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

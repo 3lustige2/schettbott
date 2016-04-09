@@ -5,8 +5,8 @@ ini_set('display_errors', 1);
 require_once __DIR__.'/../vendor/autoload.php';
 
 use DLZ\Schettbott\Command\StartCommand;
+use DLZ\Schettbott\Command\TweetCommand;
 use DLZ\Schettbott\SchettbottApplication;
-use Google\Cloud\Compute\Metadata;
 use Monolog\Handler\SyslogHandler;
 use Monolog\Logger;
 use Silex\Provider\MonologServiceProvider;
@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Telegram\Bot\Api;
 
-$dotenv = new Dotenv\Dotenv(__DIR__.'/../');
+$dotenv = new Dotenv\Dotenv(__DIR__.'/../', 'env');
 $dotenv->load();
 
 $app = new SchettbottApplication();
@@ -45,7 +45,12 @@ $app['monolog'] = $app->share(
 $app['telegram'] = $app->share(
     function () use ($app) {
         $bot = new Api(getenv('TELEGRAM_TOKEN'));
-        $bot->addCommand(StartCommand::class);
+        $bot->addCommands(
+            [
+                StartCommand::class,
+                TweetCommand::class,
+            ]
+        );
 
         return $bot;
     }
@@ -107,7 +112,7 @@ $app->get(
     function () use ($app) {
         /** @var Api $telegram */
         $telegram = $app['telegram'];
-        $token = $app['telegram.token'];
+        $token = getenv('TELEGRAM_TOKEN');
 
         $result = $telegram->setWebhook(
             [

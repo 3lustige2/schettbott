@@ -1,0 +1,25 @@
+language: php
+php:
+- '5.5'
+before_install:
+- openssl aes-256-cbc -K $encrypted_e2bda422f317_key -iv $encrypted_e2bda422f317_iv
+  -in client-secret.json.enc -out client-secret.json -d
+before_deploy:
+- env | grep TELEGRAM_TOKEN > env
+cache:
+  directories:
+  - ".composer/cache"
+deploy:
+  provider: gae
+  keyfile: client-secret.json
+  project: schettbott
+  skip_cleanup: true
+install:
+- "composer install"
+notifications:
+  email: false
+script: "/bin/true"
+sudo: false
+env:
+  global:
+    secure: X83fsoeKND5dp86lgQeVuw1ORyTIa3BDd36FDYpl6bePcOo7uTu25PZT5B+Fb3qV2qNFrYfaMBeTJXE3juak7/MeK1/VjvWesi61GbBUkvqfSrqwEti++0xXPA/r29T3VXh4GTwP56zBwGelpg+gOlhUDbKKjrGCgv6ZHja1n0BqEu2qZbspifhYaBlWJr45498qYbO938Tyyb3p6uNja4ml8eEttehIQQfJWKqHe+NPCIp17ImW8lSOy+bq0JVjA1TgGIjGRE6uH2+K128sHMFqIiMk3JztL+IUeLM3go6tqShL7SrPYDWf2kjdg8HcU/PfUfotm+SH879R2XmfusQJ8S9gVVXLnk1iwgiF5umClM0XBF+qxr71K1lOFVji0gCGSyx6NfM8b1cFO3Q1UveoXqsRt7wdzlMHbusZXm5VJiJ5ZFvSuvqL9abHBucMt6VjfRPp+YUdROscXWq9+sdjuSSfQpsjSo+G8Wt8aU29Wg++B1WL6l7IN1nUZylzE7V0YF4S5RqeWsolNmy6Oyf0AhZW5Uwbmg94oi2zxKL4EcPLfGp5iodc0IqMwWlhbMSM/JAy0uTXM7yRDhtsw9TVs7K9+neuMEYppeDCiEOPz75m9LAI511cgPFN0Dc04oZ8dojvyious4uxYAH9qJiVdvaTn9A76bMQdCKAXFk=

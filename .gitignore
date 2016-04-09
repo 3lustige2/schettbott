@@ -1,4 +1,5 @@
 vendor
 .idea
 .iml
-.env
+env
+client-secret.json
