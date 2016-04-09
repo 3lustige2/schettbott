@@ -183,7 +183,7 @@ $app->get(
     function () {
         $serverVars = $_SERVER;
         unset($serverVars['TELEGRAM_TOKEN']);
-        $content = var_dump($serverVars, true);
+        $content = print_r($serverVars, true);
 
         return new Response('<html><body><pre>'.$content.'</pre></body></html>');
     }
