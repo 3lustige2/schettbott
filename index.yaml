@@ -4,6 +4,7 @@ indexes:
   ancestor: no
   properties:
   - name: status
+    direction: asc
   - name: body
   - name: created_at
     direction: asc
