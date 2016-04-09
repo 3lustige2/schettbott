@@ -1,0 +1,19 @@
+{
+    "name": "3lustige2/schettbott",
+    "require": {
+        "irazasyed/telegram-bot-sdk": "^2.0",
+        "silex/silex": "^1.3",
+        "google/cloud": "^0.2.0"
+    },
+    "authors": [
+        {
+            "name": "Cedric Ziel",
+            "email": "cedric@cedric-ziel.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DLZ\\Schettbott\\": "src/"
+        }
+    }
+}
