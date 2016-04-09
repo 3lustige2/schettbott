@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Telegram\Bot\Api;
 
+$dotenv = new Dotenv\Dotenv(__DIR__.'/../');
+$dotenv->load();
+
 $app = new SchettbottApplication();
 
 $app->register(
@@ -39,15 +42,9 @@ $app['monolog'] = $app->share(
     )
 );
 
-$app['appengine.metadata'] = $app->share(
-    function () {
-        return new Metadata();
-    }
-);
-
 $app['telegram'] = $app->share(
     function () use ($app) {
-        $bot = new Api($app['appengine.metadata']->get('telegram_token'));
+        $bot = new Api(getenv('TELEGRAM_TOKEN'));
         $bot->addCommand(StartCommand::class);
 
         return $bot;
@@ -89,7 +86,7 @@ $app->post(
     '/webhook/{token}',
     function (Request $request, $token) use ($app) {
 
-        if ($token !== $app['appengine.metadata']->get('telegram_token')) {
+        if ($token !== getenv('TELEGRAM_TOKEN')) {
             $app->log('Telegram token doesn\'t match', ['request' => $request], Logger::ERROR);
 
             return new Response('Wrong token.', Response::HTTP_INTERNAL_SERVER_ERROR);
