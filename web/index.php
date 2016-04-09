@@ -10,6 +10,7 @@ use DLZ\Schettbott\Entity\Tweet;
 use DLZ\Schettbott\Entity\TweetVote;
 use DLZ\Schettbott\Provider\DatastoreServiceProvider;
 use DLZ\Schettbott\SchettbottApplication;
+use DLZ\Schettbott\Service\TweetService;
 use GDS\Store;
 use Monolog\Handler\SyslogHandler;
 use Monolog\Logger;
@@ -101,14 +102,13 @@ $app->get(
 
         $tweetVoteStore->upsert($vote);
 
-        $votableTweets = $app['tweet_service']->findTweetsByStatus('open');
-        $votes = $app['tweet_service']->findVotesByTweets($votableTweets);
+        /** @var TweetService $tweetService */
+        $tweetService = $app['tweet_service'];
+        $votableTweets = $tweetService->findTweetsByStatus('open');
 
         return new JsonResponse(
             array_map(
-                function ($entity) use ($votes) {
-                    /** @var Tweet $entity */
-                    $tweetVotes = $votes[$entity->getKeyId()];
+                function ($entity) use ($tweetService) {
 
                     /** @var Tweet $entity */
                     return [
@@ -123,7 +123,7 @@ $app->get(
                                     'id' => $vote->getKeyId(),
                                 ];
                             },
-                            $tweetVotes
+                            $tweetService->findVotesByTweet($entity)
                         ),
                     ];
                 },

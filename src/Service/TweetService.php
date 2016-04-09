@@ -63,4 +63,19 @@ class TweetService
 
         return $votes;
     }
+
+    /**
+     * @param Tweet $tweet
+     * @return \DLZ\Schettbott\Entity\TweetVote[]
+     */
+    public function findVotesByTweet(Tweet $tweet)
+    {
+        return $this->tweetVoteStore
+            ->fetchAll(
+                "SELECT * FROM TweetVote WHERE __key__ HAS ANCESTOR @tweet",
+                [
+                    'tweet' => $tweet,
+                ]
+            );
+    }
 }

@@ -13,8 +13,36 @@ use GDS\Entity;
  */
 class Tweet extends Entity
 {
+    /**
+     * Transient property
+     *
+     * @var TweetVote[]
+     */
+    protected $votes;
+
     public function __construct()
     {
         $this->setKind('Tweet');
+
+        $this->votes = [];
+    }
+
+    /**
+     * @return TweetVote[]
+     */
+    public function getVotes()
+    {
+        return $this->votes;
+    }
+
+    /**
+     * @param TweetVote[] $votes
+     * @return Tweet
+     */
+    public function setVotes($votes)
+    {
+        $this->votes = $votes;
+
+        return $this;
     }
 }
