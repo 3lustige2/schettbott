@@ -19,6 +19,10 @@ $dotenv->load();
 
 $app = new SchettbottApplication();
 
+/**
+ * Add logging so it can be easily monitored on
+ * the cloud console.
+ */
 $app->register(
     new MonologServiceProvider(),
     [
@@ -26,6 +30,10 @@ $app->register(
     ]
 );
 
+/**
+ * Override all current loghandlers in favor of
+ * a syslog handler.
+ */
 $app['monolog'] = $app->share(
     $app->extend(
         'monolog',
@@ -42,6 +50,9 @@ $app['monolog'] = $app->share(
     )
 );
 
+/**
+ * The telegram API instance.
+ */
 $app['telegram'] = $app->share(
     function () use ($app) {
         $bot = new Api(getenv('TELEGRAM_TOKEN'));
@@ -56,34 +67,13 @@ $app['telegram'] = $app->share(
     }
 );
 
+/**
+ * Dummy index route
+ */
 $app->get(
     '/',
     function () {
         return new Response('Hi');
-    }
-);
-$app->get(
-    '/_ah/health',
-    function (Request $request) use ($app) {
-        $app->log('Health check', $request, Logger::INFO);
-
-        return new Response('OK');
-    }
-);
-$app->get(
-    '/_ah/start',
-    function (Request $request) use ($app) {
-        $app->log('Instance start request', $request, Logger::INFO);
-
-        return new Response('OK');
-    }
-);
-$app->get(
-    '/_ah/stop',
-    function (Request $request) use ($app) {
-        $app->log('Instance stop request', $request, Logger::INFO);
-
-        return new Response('OK');
     }
 );
 
@@ -107,6 +97,9 @@ $app->post(
     }
 );
 
+/**
+ * Registers a webhook to the Telegram platform with the current module
+ */
 $app->get(
     '/register_webhook',
     function () use ($app) {
@@ -128,6 +121,10 @@ $app->get(
     }
 );
 
+/**
+ * De-registers the webhook URL for the Bot with the current API
+ * key.
+ */
 $app->get(
     '/unregister_webhook',
     function (Request $request) use ($app) {
@@ -145,12 +142,17 @@ $app->get(
     }
 );
 
+/**
+ * Displays information about the current environment
+ */
 $app->get(
     '/env',
     function () {
-        $content = var_dump($_SERVER, true);
+        $serverVars = $_SERVER;
+        unset($serverVars['TELEGRAM_TOKEN']);
+        $content = var_dump($serverVars, true);
 
-        return new Response($content);
+        return new Response('<pre>'.$content.'</pre>');
     }
 );
 
