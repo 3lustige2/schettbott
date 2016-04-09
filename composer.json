@@ -4,7 +4,8 @@
         "irazasyed/telegram-bot-sdk": "dev-master",
         "silex/silex": "^1.3",
         "google/cloud": "^0.2.0",
-        "vlucas/phpdotenv": "^2.2"
+        "vlucas/phpdotenv": "^2.2",
+        "tomwalder/php-gds": "^2.1"
     },
     "authors": [
         {

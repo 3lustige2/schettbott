@@ -26,13 +26,14 @@ class TweetCommand extends Command
      */
     public function handle($arguments)
     {
+        $arguments = trim($arguments);
+
         $memcache = new Memcache;
         $memcache->set('tweet:'.time(), $arguments);
 
         $keyboard = [
             ['/tweet new'],
-            ['/tweet vote yes'],
-            ['/tweet vote no'],
+            ['/tweet list'],
         ];
 
         $reply_markup = $this->telegram->replyKeyboardMarkup(

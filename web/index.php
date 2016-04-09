@@ -6,10 +6,13 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use DLZ\Schettbott\Command\StartCommand;
 use DLZ\Schettbott\Command\TweetCommand;
+use DLZ\Schettbott\Provider\DatastoreServiceProvider;
 use DLZ\Schettbott\SchettbottApplication;
+use GDS\Store;
 use Monolog\Handler\SyslogHandler;
 use Monolog\Logger;
 use Silex\Provider\MonologServiceProvider;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Telegram\Bot\Api;
@@ -17,7 +20,10 @@ use Telegram\Bot\Api;
 $dotenv = new Dotenv\Dotenv(__DIR__.'/../', 'env');
 $dotenv->load();
 
+\Monolog\ErrorHandler::register(new Logger('err', [new \Monolog\Handler\SyslogHandler('errors')]));
+
 $app = new SchettbottApplication();
+$app['debug'] = true;
 
 /**
  * Add logging so it can be easily monitored on
@@ -29,6 +35,8 @@ $app->register(
         'monolog.logfile' => __DIR__.'/development.log',
     ]
 );
+
+$app->register(new DatastoreServiceProvider());
 
 /**
  * Override all current loghandlers in favor of
@@ -72,8 +80,33 @@ $app['telegram'] = $app->share(
  */
 $app->get(
     '/',
-    function () {
-        return new Response('Hi');
+    function () use ($app) {
+        /** @var Store $store */
+        $store = $app['store.tweet'];
+
+        $entity = new \DLZ\Schettbott\Entity\Tweet();
+        $entity->body = 'Gibberish';
+        $entity->created_at = new DateTime();
+        $entity->status = 'open';
+
+        $store->upsert($entity);
+
+        $votableTweets = $app['tweet_service']->findTweetsByStatus('open');
+
+        return new JsonResponse(
+            array_map(
+                function ($entity) {
+                    /** @var \DLZ\Schettbott\Entity\Tweet $entity */
+                    return [
+                        'id' => $entity->getKeyId(),
+                        'body' => $entity->body,
+                        'status' => $entity->status,
+                        'created_at' => $entity->created_at,
+                    ];
+                },
+                $votableTweets
+            )
+        );
     }
 );
 
@@ -152,7 +185,7 @@ $app->get(
         unset($serverVars['TELEGRAM_TOKEN']);
         $content = var_dump($serverVars, true);
 
-        return new Response('<pre>'.$content.'</pre>');
+        return new Response('<html><body><pre>'.$content.'</pre></body></html>');
     }
 );
 
