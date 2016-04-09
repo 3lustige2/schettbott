@@ -1,0 +1,11 @@
+indexes:
+
+- kind: Tweet
+  ancestor: no
+  properties:
+  - name: status
+  - name: body
+  - name: created_at
+    direction: asc
+  - name: created_at
+    direction: desc
