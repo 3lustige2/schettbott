@@ -1,4 +1,3 @@
-application: schettbott
 runtime: php55
 api_version: 1
 threadsafe: true
