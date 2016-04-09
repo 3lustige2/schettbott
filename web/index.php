@@ -6,6 +6,8 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use DLZ\Schettbott\Command\StartCommand;
 use DLZ\Schettbott\Command\TweetCommand;
+use DLZ\Schettbott\Entity\Tweet;
+use DLZ\Schettbott\Entity\TweetVote;
 use DLZ\Schettbott\Provider\DatastoreServiceProvider;
 use DLZ\Schettbott\SchettbottApplication;
 use GDS\Store;
@@ -84,24 +86,45 @@ $app->get(
         /** @var Store $store */
         $store = $app['store.tweet'];
 
-        $entity = new \DLZ\Schettbott\Entity\Tweet();
+        /** @var Store $tweetVoteStore */
+        $tweetVoteStore = $app['store.tweet_vote'];
+
+        $entity = new Tweet();
         $entity->body = 'Gibberish';
         $entity->created_at = new DateTime();
         $entity->status = 'open';
 
         $store->upsert($entity);
 
+        $vote = new TweetVote();
+        $vote->setAncestry($entity);
+
+        $tweetVoteStore->upsert($vote);
+
         $votableTweets = $app['tweet_service']->findTweetsByStatus('open');
+        $votes = $app['tweet_service']->findVotesByTweets($votableTweets);
 
         return new JsonResponse(
             array_map(
-                function ($entity) {
-                    /** @var \DLZ\Schettbott\Entity\Tweet $entity */
+                function ($entity) use ($votes) {
+                    /** @var Tweet $entity */
+                    $tweetVotes = $votes[$entity->getKeyId()];
+
+                    /** @var Tweet $entity */
                     return [
                         'id' => $entity->getKeyId(),
                         'body' => $entity->body,
                         'status' => $entity->status,
                         'created_at' => $entity->created_at,
+                        'votes' => array_map(
+                            function ($vote) {
+                                /** @var Tweet $vote */
+                                return [
+                                    'id' => $vote->getKeyId(),
+                                ];
+                            },
+                            $tweetVotes
+                        ),
                     ];
                 },
                 $votableTweets

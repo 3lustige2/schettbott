@@ -2,6 +2,8 @@
 
 namespace DLZ\Schettbott\Service;
 
+use DLZ\Schettbott\Entity\Tweet;
+use DLZ\Schettbott\Entity\TweetVote;
 use GDS\Store;
 
 class TweetService
@@ -28,7 +30,7 @@ class TweetService
 
     /**
      * @param string $status
-     * @return \DLZ\Schettbott\Entity\Tweet[]
+     * @return Tweet[]
      */
     public function findTweetsByStatus($status)
     {
@@ -39,5 +41,26 @@ class TweetService
                     'status' => $status,
                 ]
             );
+    }
+
+    /**
+     * @param Tweet[] $tweets
+     * @return TweetVote[]
+     */
+    public function findVotesByTweets(array $tweets = [])
+    {
+        $votes = [];
+
+        foreach ($tweets as $tweet) {
+            $votes[$tweet->getKeyId()] = $this->tweetVoteStore
+                ->fetchAll(
+                    "SELECT * FROM TweetVote WHERE __key__ HAS ANCESTOR @tweet",
+                    [
+                        'tweet' => $tweet,
+                    ]
+                );
+        }
+
+        return $votes;
     }
 }

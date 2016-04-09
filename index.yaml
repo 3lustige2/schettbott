@@ -10,3 +10,14 @@ indexes:
     direction: asc
   - name: created_at
     direction: desc
+
+- kind: Tweet
+  ancestor: no
+  properties:
+  - name: status
+    direction: asc
+  - name: created_at
+    direction: asc
+
+- kind: TweetVote
+  ancestor: yes
