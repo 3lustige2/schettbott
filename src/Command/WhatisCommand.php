@@ -32,13 +32,20 @@ class WhatisCommand extends Command
         $apiKey = getenv('GOOGLE_APIKEY');
         // This will update the chat status to typing...
         $this->replyWithChatAction(['action' => Actions::TYPING]);
+        $limit = 1;
 
         $httpClient = new Client();
         try {
+            $parts = explode(';', $arguments);
+            $partCount = count($parts);
+            if ($partCount > 1) {
+                $limit = (int)$parts[$partCount - 1];
+            }
+
             $response = $httpClient->request('GET', $this->knowledgeGraphBaseUri, [
                 'query' => [
                     'key' => $apiKey,
-                    'limit' => 10,
+                    'limit' => $limit,
                     'query' => $arguments,
                 ],
             ]);
