@@ -69,7 +69,7 @@ class WhatisCommand extends Command
                 }
             }
         } catch (ClientException $e) {
-            $this->replyWithMessage(['text' => print_r($e->getMessage(), true)]);
+            $this->replyWithMessage(['text' => 'Uups.']);
         }
     }
 }
