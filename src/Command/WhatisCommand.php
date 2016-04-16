@@ -69,7 +69,7 @@ class WhatisCommand extends Command
                 }
             }
         } catch (ClientException $e) {
-            $this->replyWithMessage(['text' => 'Uups.']);
+            $this->replyWithMessage(['text' => '<a href="https://github.com/3lustige2/schettbott/wiki/1460833560">Uups</a>.']);
         }
     }
 }
