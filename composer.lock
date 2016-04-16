@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a3ca1eaff1c71519beaad33550357561",
-    "content-hash": "953d656dc9bc0da72f6e2651c06c10f8",
+    "hash": "bd7d60fa4765689299d60bf6ce38abb7",
+    "content-hash": "1794c010efd0f2086bae0562889e1f87",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -163,64 +163,6 @@
                 "oauth2"
             ],
             "time": "2016-03-03 02:03:58"
-        },
-        {
-            "name": "google/cloud",
-            "version": "v0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/GoogleCloudPlatform/gcloud-php.git",
-                "reference": "bda29bb6c531ecdb49a4fd351b84ba62ca869760"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/GoogleCloudPlatform/gcloud-php/zipball/bda29bb6c531ecdb49a4fd351b84ba62ca869760",
-                "reference": "bda29bb6c531ecdb49a4fd351b84ba62ca869760",
-                "shasum": ""
-            },
-            "require": {
-                "google/auth": "0.7",
-                "guzzlehttp/guzzle": "~5.2|~6.0",
-                "guzzlehttp/psr7": "1.2.*",
-                "monolog/monolog": "~1",
-                "php": ">=5.5",
-                "psr/http-message": "1.0.*",
-                "rize/uri-template": "~0.3"
-            },
-            "require-dev": {
-                "phpdocumentor/phpdocumentor": "2.8.*",
-                "phpunit/phpunit": "4.8.*",
-                "squizlabs/php_codesniffer": "2.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Google\\Cloud\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Dave Supplee",
-                    "email": "dwsupplee@gmail.com"
-                }
-            ],
-            "description": "Google Cloud Client Library",
-            "homepage": "http://github.com/GoogleCloudPlatform/gcloud-php",
-            "keywords": [
-                "cloud",
-                "google",
-                "google api",
-                "google api client",
-                "google apis",
-                "google apis client",
-                "google cloud",
-                "google cloud platform"
-            ],
-            "time": "2016-04-03 01:02:32"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -496,13 +438,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:irazasyed/telegram-bot-sdk.git",
-                "reference": "ab2d260e99e7dfaada17b0df3c7a83a370b51e21"
+                "url": "https://github.com/irazasyed/telegram-bot-sdk.git",
+                "reference": "dedd461927cfbad36e167daa9ad7f8686615ff54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/irazasyed/telegram-bot-sdk/zipball/ab2d260e99e7dfaada17b0df3c7a83a370b51e21",
-                "reference": "ab2d260e99e7dfaada17b0df3c7a83a370b51e21",
+                "url": "https://api.github.com/repos/irazasyed/telegram-bot-sdk/zipball/dedd461927cfbad36e167daa9ad7f8686615ff54",
+                "reference": "dedd461927cfbad36e167daa9ad7f8686615ff54",
                 "shasum": ""
             },
             "require": {
@@ -551,20 +493,20 @@
                 "telegram php",
                 "telegram sdk"
             ],
-            "time": "2016-04-06 11:59:14"
+            "time": "2016-04-16 12:53:47"
         },
         {
             "name": "monolog/monolog",
-            "version": "1.18.2",
+            "version": "1.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "064b38c16790249488e7a8b987acf1c9d7383c09"
+                "reference": "5f56ed5212dc509c8dc8caeba2715732abb32dbf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/064b38c16790249488e7a8b987acf1c9d7383c09",
-                "reference": "064b38c16790249488e7a8b987acf1c9d7383c09",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/5f56ed5212dc509c8dc8caeba2715732abb32dbf",
+                "reference": "5f56ed5212dc509c8dc8caeba2715732abb32dbf",
                 "shasum": ""
             },
             "require": {
@@ -629,7 +571,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2016-04-02 13:12:58"
+            "time": "2016-04-12 18:29:35"
         },
         {
             "name": "paragonie/random_compat",
@@ -811,50 +753,6 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
-        },
-        {
-            "name": "rize/uri-template",
-            "version": "0.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rize/UriTemplate.git",
-                "reference": "2496aa674438f1c48fce122ffc44291ad7014717"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rize/UriTemplate/zipball/2496aa674438f1c48fce122ffc44291ad7014717",
-                "reference": "2496aa674438f1c48fce122ffc44291ad7014717",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Rize\\UriTemplate": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Marut K",
-                    "homepage": "http://twitter.com/rezigned"
-                }
-            ],
-            "description": "PHP URI Template (RFC 6570) supports both expansion & extraction",
-            "keywords": [
-                "RFC 6570",
-                "template",
-                "uri"
-            ],
-            "time": "2015-04-17 16:12:22"
         },
         {
             "name": "silex/silex",

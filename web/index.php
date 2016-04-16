@@ -6,6 +6,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use DLZ\Schettbott\Command\StartCommand;
 use DLZ\Schettbott\Command\TweetCommand;
+use DLZ\Schettbott\Command\WhatisCommand;
 use DLZ\Schettbott\Entity\Tweet;
 use DLZ\Schettbott\Entity\TweetVote;
 use DLZ\Schettbott\Provider\DatastoreServiceProvider;
@@ -71,6 +72,7 @@ $app['telegram'] = $app->share(
             [
                 StartCommand::class,
                 TweetCommand::class,
+                WhatisCommand::class,
             ]
         );
 
