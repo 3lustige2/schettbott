@@ -29,6 +29,7 @@ class WhatisCommand extends Command
      */
     public function handle($arguments)
     {
+        $term = $arguments;
         $apiKey = getenv('GOOGLE_APIKEY');
         // This will update the chat status to typing...
         $this->replyWithChatAction(['action' => Actions::TYPING]);
@@ -40,13 +41,14 @@ class WhatisCommand extends Command
             $partCount = count($parts);
             if ($partCount > 1) {
                 $limit = (int)$parts[$partCount - 1];
+                $term = $parts[0];
             }
 
             $response = $httpClient->request('GET', $this->knowledgeGraphBaseUri, [
                 'query' => [
                     'key' => $apiKey,
                     'limit' => $limit,
-                    'query' => $arguments,
+                    'query' => $term,
                 ],
             ]);
 
