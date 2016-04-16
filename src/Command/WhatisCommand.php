@@ -71,7 +71,8 @@ class WhatisCommand extends Command
         } catch (ClientException $e) {
             $this->replyWithMessage([
                 'text' => '<a href="https://github.com/3lustige2/schettbott/wiki/1460833560">Uups</a>.',
-                'parse_mode' => 'HTML'
+                'parse_mode' => 'HTML',
+                'disable_web_page_preview' => true
             ]);
         }
     }
