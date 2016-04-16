@@ -44,6 +44,15 @@ class WhatisCommand extends Command
                 $term = $parts[0];
             }
 
+            if ((int)$limit > 20) {
+                $this->replyWithPhoto([
+                    'photo' => 'http://www.familysecuritymatters.org/imgLib/20140717_ObamaMiddleFingerL.jpg',
+                    'caption' => 'Hartes Limit bei 20 items. Reset.',
+                ]);
+
+                $limit = 20;
+            }
+
             $response = $httpClient->request('GET', $this->knowledgeGraphBaseUri, [
                 'query' => [
                     'key' => $apiKey,
@@ -72,7 +81,7 @@ class WhatisCommand extends Command
             $this->replyWithMessage([
                 'text' => '<a href="https://github.com/3lustige2/schettbott/wiki/1460833560">Uups</a>.',
                 'parse_mode' => 'HTML',
-                'disable_web_page_preview' => true
+                'disable_web_page_preview' => true,
             ]);
         }
     }
