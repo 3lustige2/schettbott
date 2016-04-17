@@ -65,7 +65,10 @@ class WhatisCommand extends Command
             $items = GraphItemFactory::createItemFromArray($response->itemListElement);
             foreach ($items as $item) {
                 if ($item->image !== null && $item->image->contentUrl !== null) {
-                    $fileName = 'gs://schettbott.appspot.com/kg/images/'.time().'.jpg';
+
+                    $nameHash = sha1($item->image->contentUrl);
+
+                    $fileName = 'gs://schettbott.appspot.com/kg/images/'.$nameHash.'.jpg';
                     $result = file_get_contents($item->image->contentUrl);
                     file_put_contents($fileName, $result);
 
