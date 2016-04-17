@@ -22,6 +22,8 @@ env:
 - PATH=${HOME}/gcloud/google-cloud-sdk/bin:${PATH}
 install:
 - composer install
+notifications:
+  email: false
 script: "/bin/true"
 sudo: false
 env:
