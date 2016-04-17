@@ -210,6 +210,7 @@ $app->get(
     function () {
         $serverVars = $_SERVER;
         unset($serverVars['TELEGRAM_TOKEN']);
+        unset($serverVars['GOOGLE_APIKEY']);
         $content = print_r($serverVars, true);
 
         return new Response('<html><body><pre>'.$content.'</pre></body></html>');
