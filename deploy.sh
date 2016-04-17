@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -ex
-
 # Install gcloud
 if [ ! -d ${HOME}/gcloud/google-cloud-sdk ]; then
     mkdir -p ${HOME}/gcloud &&
