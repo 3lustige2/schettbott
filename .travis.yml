@@ -19,6 +19,7 @@ deploy:
     branch: master
 env:
 - GOOGLE_PROJECT_ID=schettbott
+- PATH=${HOME}/gcloud/google-cloud-sdk/bin:${PATH}
 install:
 - composer install
 script: "/bin/true"
