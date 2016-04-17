@@ -63,6 +63,15 @@ class WhatisCommand extends Command
 
             $response = json_decode($response->getBody()->getContents());
             $items = GraphItemFactory::createItemFromArray($response->itemListElement);
+
+            if (count($items) === 0) {
+                $this->replyWithMessage([
+                       'text' => 'Keine Ergebnisse. <a href="https://www.google.com/#q=' . $term. '">Suche nach ' . $term . '</a>.',
+                       'parse_mode' => 'HTML',
+                       'disable_web_page_preview' => true,
+                   ]);
+            }
+
             foreach ($items as $item) {
                 if ($item->image !== null && $item->image->contentUrl !== null) {
 
