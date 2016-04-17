@@ -44,7 +44,7 @@ class WhatisCommand extends Command
                 $term = $parts[0];
             }
 
-            if ((int)$limit > 20) {
+            if ((int)$limit > 10) {
                 $this->replyWithPhoto([
                     'photo' => 'http://www.familysecuritymatters.org/imgLib/20140717_ObamaMiddleFingerL.jpg',
                     'caption' => 'Hartes Limit bei 10 items. Reset.',
