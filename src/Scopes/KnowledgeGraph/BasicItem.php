@@ -36,4 +36,12 @@ class BasicItem implements GraphItemInterface
     {
         return "{$this->name} is a {$this->description}";
     }
+
+    /**
+     * @return bool
+     */
+    public function hasImage()
+    {
+        return $this->image !== null && $this->image->contentUrl !== null;
+    }
 }

@@ -73,7 +73,7 @@ class WhatisCommand extends Command
             }
 
             foreach ($items as $item) {
-                if ($item->image !== null && $item->image->contentUrl !== null) {
+                if ($item->hasImage()) {
 
                     $nameHash = sha1($item->image->contentUrl);
 

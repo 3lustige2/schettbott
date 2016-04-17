@@ -11,4 +11,9 @@ interface GraphItemInterface
      * @return string
      */
     public function toString();
+
+    /**
+     * @return bool
+     */
+    public function hasImage();
 }
